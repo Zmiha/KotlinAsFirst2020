@@ -17,7 +17,7 @@ import kotlin.math.sqrt
 fun factorial(n: Int): Double {
     var result = 1.0
     for (i in 1..n) {
-        result = result * i // Please do not fix in master
+        result *= i // Please do not fix in master
     }
     return result
 }
@@ -72,7 +72,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var c = 0
+    var num = n
+    do {
+        c++
+        num /= 10
+    } while (num > 0)
+    return c
+}
 
 /**
  * Простая (2 балла)
@@ -80,7 +88,12 @@ fun digitNumber(n: Int): Int = TODO()
  * Найти число Фибоначчи из ряда 1, 1, 2, 3, 5, 8, 13, 21, ... с номером n.
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
-fun fib(n: Int): Int = TODO()
+fun fib(n: Int): Int {
+    return if ((n == 1) || (n == 2))
+        1
+    else
+        return (fib(n - 2) + fib(n - 1))
+}
 
 /**
  * Простая (2 балла)
@@ -120,7 +133,16 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int = TODO()
+fun lcm(m: Int, n: Int): Int {
+    var k = 0
+    for (i in 1..n * m)
+        if (i % n == 0)
+            if (i % m == 0) {
+                k = i
+                break
+            }
+    return k
+}
 
 /**
  * Средняя (3 балла)
@@ -192,7 +214,27 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun sqr(n: Int): Int = n * n
+fun squareSequenceDigit(n: Int): Int {
+    val num = Array(1000) { 0 }
+    var ch: Int
+    var c = 0
+    for (i in 1..n) {
+        ch = sqr(i)
+        while (ch > 0) {
+            c++
+            ch /= 10
+        }
+        ch = sqr(i)
+        var k = -1
+        while (ch > 0) {
+            k += 1
+            num[c - k] = ch % 10
+            ch /= 10
+        }
+    }
+    return num[n]
+}
 
 /**
  * Сложная (5 баллов)
@@ -203,4 +245,23 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+    val num = Array(1000) { 0 }
+    var ch: Int
+    var c = 0
+    for (i in 1..n) {
+        ch = fib(i)
+        while (ch > 0) {
+            c++
+            ch /= 10
+        }
+        ch = fib(i)
+        var k = -1
+        while (ch > 0) {
+            k += 1
+            num[c - k] = ch % 10
+            ch /= 10
+        }
+    }
+    return num[n]
+}

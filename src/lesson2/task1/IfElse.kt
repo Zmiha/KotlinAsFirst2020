@@ -68,7 +68,19 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String {
+    return if ((age > 0) && (age < 200))
+        if ((age % 10 == 1) && ((age != 11) && (age != 111)))
+            "$age год"
+        else
+            if ((age % 10 == 2 || age % 10 == 3 || age % 10 ==4) &&
+                (age > 19) && ((age < 111) || (age > 121)))
+                "$age года"
+            else
+                "$age лет"
+    else
+        "Unreal age - $age"
+}
 
 /**
  * Простая (2 балла)
@@ -81,7 +93,25 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    val s = t1 * v1 +
+            t2 * v2 +
+            t3 * v3
+    val halfs = s / 2
+    val pass1 = t1 * v1
+    val pass2 = pass1 + t2 * v2
+    val pass3 = pass2 + t3 * t3
+    return if (halfs < pass1)
+        halfs / v1
+    else
+        if (halfs < pass2)
+            (halfs - pass1) / v2 + t1
+        else
+            if (halfs < pass3)
+                (halfs - pass2) / v3 + t1 + t2
+            else
+                0.0
+}
 
 /**
  * Простая (2 балла)
@@ -122,7 +152,33 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val m = if (a > b)
+        if (a > c)
+            a
+        else
+            c
+    else
+        if (b > c)
+            b
+        else
+            c
+    val st1 = if (m == a)
+        b
+    else
+        a
+    val st2 = a + b + c - st1 - m
+    return if (m > st1 + st2)
+        -1
+    else
+        if (m * m < st1 * st1 + st2 * st2)
+            0
+        else
+            if (m * m == st1 * st1 + st2 * st2)
+                1
+            else
+                2
+}
 
 /**
  * Средняя (3 балла)
@@ -132,4 +188,18 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    return if ((c > a) && (c <= b))
+        if (d < b)
+            d - c
+        else
+            b - c
+    else
+        if ((a > c) && (a <= d))
+            if (b < d)
+                b - a
+            else
+                d - a
+        else
+            -1
+}

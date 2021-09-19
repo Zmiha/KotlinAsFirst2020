@@ -215,25 +215,27 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun sqr(n: Int): Int = n * n
-fun squareSequenceDigit(n: Int): Int {
-    val num = Array(1000) { 0 }
-    var ch: Int
+fun squareSequenceDigit(n: Int): Int? {
     var c = 0
-    for (i in 1..n) {
-        ch = sqr(i)
-        while (ch > 0) {
-            c++
+    var k = 0
+    var t = 0
+    val a = arrayOfNulls<Int>(n + n)
+    while (c < n) {
+        k += 1
+        var ch = sqr(k)
+        while (ch > 0){
+            c += 1
+            t += 1
             ch /= 10
         }
-        ch = sqr(i)
-        var k = -1
-        while (ch > 0) {
-            k += 1
-            num[c - k] = ch % 10
+        ch = sqr(k)
+        for (i in 0 until t) {
+            a[c - i] = ch % 10
             ch /= 10
         }
+        t = 0
     }
-    return num[n]
+    return a[n]
 }
 
 /**
@@ -245,23 +247,25 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int {
-    val num = Array(1000) { 0 }
-    var ch: Int
+fun fibSequenceDigit(n: Int): Int? {
     var c = 0
-    for (i in 1..n) {
-        ch = fib(i)
-        while (ch > 0) {
-            c++
+    var k = 0
+    var t = 0
+    val a = arrayOfNulls<Int>(n + n)
+    while (c < n) {
+        k += 1
+        var ch = fib(k)
+        while (ch > 0){
+            c += 1
+            t += 1
             ch /= 10
         }
-        ch = fib(i)
-        var k = -1
-        while (ch > 0) {
-            k += 1
-            num[c - k] = ch % 10
+        ch = fib(k)
+        for (i in 0 until t) {
+            a[c - i] = ch % 10
             ch /= 10
         }
+        t = 0
     }
-    return num[n]
+    return a[n]
 }

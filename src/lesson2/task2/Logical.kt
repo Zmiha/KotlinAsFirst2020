@@ -3,6 +3,7 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import kotlin.math.min
 
 /**
  * Пример
@@ -43,10 +44,10 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int {
-    return if ((month % 2 == 0) && (month != 2) && (month <= 7) )
+    return if ((month % 2 == 0) && (month != 2) && (month <= 7))
         30
     else
-        if ((month % 2 == 1) && (month != 2) && (month <= 7) )
+        if ((month % 2 == 1) && (month != 2) && (month <= 7))
             31
         else
             if (month > 7)
@@ -83,8 +84,17 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    val sh = r * s
-    val mx = if (a > b)
+    val mi = if (a < b)
+        if (a < c)
+            a
+        else
+            c
+    else
+        if (b < c)
+            b
+        else
+            c
+    val ma = if (a > b)
         if (a > c)
             a
         else
@@ -94,6 +104,7 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
             b
         else
             c
-    val ms = a * b * c / mx
-    return (ms <= sh)
+    val sr = a + b + c - ma - mi
+    val hmi = min(r, s)
+    return (mi <= hmi) && (sr <= (r + s - hmi))
 }

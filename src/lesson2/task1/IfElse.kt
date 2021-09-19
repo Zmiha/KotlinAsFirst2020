@@ -73,7 +73,7 @@ fun ageDescription(age: Int): String {
         if ((age % 10 == 1) && ((age != 11) && (age != 111)))
             "$age год"
         else
-            if ((age % 10 == 2 || age % 10 == 3 || age % 10 ==4) &&
+            if ((age % 10 == 2 || age % 10 == 3 || age % 10 == 4) &&
                 (age > 19) && ((age < 111) || (age > 121)))
                 "$age года"
             else
@@ -189,13 +189,13 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return if ((c > a) && (c <= b))
+    return if ((c >= a) && (c <= b))
         if (d < b)
             d - c
         else
             b - c
     else
-        if ((a > c) && (a <= d))
+        if ((a >= c) && (a <= d))
             if (b < d)
                 b - a
             else

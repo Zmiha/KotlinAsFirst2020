@@ -68,7 +68,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String = when {
+    ((age != 11) && (age != 111) && (age % 10 == 1)) -> "$age год"
+    ((age % 10 == 2) || (age % 10 == 3) || (age % 10 == 4)) && (age != 12) && (age != 13) && (age != 14) -> "$age года"
+    else -> "$age лет"
+}
 
 /**
  * Простая (2 балла)
@@ -122,7 +126,15 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    if ((a + b > c) && (a + c > b) && (b + c > a)) {
+        return when {
+            (a * a + b * b == c * c) || (b * b + c * c == a * a) || (c * c + a * a == b * b) -> 1
+            (a * a + b * b > c * c) && (b * b + c * c > a * a) && (c * c + a * a > b * b) -> 0
+            else -> 2
+        }
+    } else return -1
+}
 
 /**
  * Средняя (3 балла)
@@ -133,6 +145,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if (b > c)
-        return Double.NaN.toInt()
+    return when {
+        ((c < b) and (a < d) and (c > a) and (b < d)) -> b - c
+        ((c < b) and (c > a) and (d > a) and (d > b)) -> d - c
+        ((c > a) and (c > b) and (d > a) and (d > b)) -> -1
+        ((c < a) and (a < b) and (d > a) and (d < b)) -> d-a
+        else -> d-a
+    }
 }

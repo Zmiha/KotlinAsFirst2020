@@ -229,10 +229,10 @@ fun squareSequenceDigit(n: Int): Int? {
     var c = 0
     var k = 0
     var t = 0
-    for (i in 1..n){
+    for (i in 1..n) {
         k += 1
         var ch1 = sqr(k)
-        while (ch1 > 0){
+        while (ch1 > 0) {
             t += 1
             ch1 /= 10
         }
@@ -272,11 +272,22 @@ fun fibSequenceDigit(n: Int): Int? {
     var c = 0
     var k = 0
     var t = 0
-    val a = arrayOfNulls<Int>(n + n)
+    for (i in 1..n) {
+        k += 1
+        var ch1 = sqr(k)
+        while (ch1 > 0) {
+            t += 1
+            ch1 /= 10
+        }
+        if (n == k) break
+    }
+    val a = arrayOfNulls<Int>(n + t)
+    k = 0
+    t = 0
     while (c < n) {
         k += 1
         var ch = fib(k)
-        while (ch > 0){
+        while (ch > 0) {
             c += 1
             t += 1
             ch /= 10

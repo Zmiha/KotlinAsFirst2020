@@ -135,16 +135,7 @@ fun collatzSteps(x: Int): Int = TODO()
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {
-    var k = 0
-    for (i in 1..n * m)
-        if (i % n == 0)
-            if (i % m == 0) {
-                k = i
-                break
-            }
-    return k
-}
+fun lcm(m: Int, n: Int): Int = TODO()
 
 /**
  * Средняя (3 балла)

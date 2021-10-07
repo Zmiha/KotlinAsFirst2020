@@ -97,7 +97,7 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double {
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
 fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
-    return (sqrt((sqr(x2-x1)) + (sqr(y2-y1))))
+    return (sqrt((sqr(x2 - x1)) + (sqr(y2 - y1))))
 }
 
 /**
@@ -109,6 +109,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
 fun thirdDigit(number: Int): Int {
     return ((number % 1000) / 100)
 }
+
 /**
  * Простая (2 балла)
  *
@@ -135,4 +136,9 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): Int {
+    val n1 = (number % 10)
+    val n2 = (number % 100 / 10)
+    val n3 = (number / 100)
+    return (n1 * 100 + n2 * 10 + n3)
+}

@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
+//import kotlin.system.exitProcess
 
 // Урок 4: списки
 // Максимальное количество баллов = 12
@@ -241,7 +242,78 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    var str = ""
+    var a = n
+    while (a > 0) {
+        if ((a - 1000) >= 0) {
+            str += "M"
+            a -= 1000
+            continue
+        }
+        if ((a - 900) >= 0) {
+            str += "CM"
+            a -= 900
+            continue
+        }
+        if ((a - 500) >= 0) {
+            str += "D"
+            a -= 500
+            continue
+        }
+        if ((a - 400) >= 0) {
+            str += "CD"
+            a -= 400
+            continue
+        }
+        if ((a - 100) >= 0) {
+            str += "C"
+            a -= 100
+            continue
+        }
+        if ((a - 90) >= 0) {
+            str += "XC"
+            a -= 90
+            continue
+        }
+        if ((a - 50) >= 0) {
+            str += "L"
+            a -= 50
+            continue
+        }
+        if ((a - 40) >= 0) {
+            str += "XL"
+            a -= 40
+            continue
+        }
+        if ((a - 10) >= 0) {
+            str += "X"
+            a -= 10
+            continue
+        }
+        if ((a - 9) >= 0) {
+            str += "IX"
+            a -= 9
+            continue
+        }
+        if ((a - 5) >= 0) {
+            str += "V"
+            a -= 5
+            continue
+        }
+        if ((a - 4) >= 0) {
+            str += "IV"
+            a -= 4
+            continue
+        }
+        if ((a - 1) >= 0) {
+            str += "I"
+            a -= 1
+            continue
+        }
+    }
+    return str
+}
 
 /**
  * Очень сложная (7 баллов)
@@ -250,4 +322,124 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var a = n
+    var t = 0
+    val number = mutableListOf<Int>(-1)
+    while (a > 0) {
+        t += 1
+        number += a % 10
+        a /= 10
+    }
+    a = n
+    val mlist = listOf(
+        "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
+        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать",
+        "восемнадцать", "девятнадцать"
+    )
+    if (n < 10) {
+        return mlist[n]
+        //exitProcess(0)
+    }
+    var half = mutableListOf<String>()
+    if (number[1] != 0) half += mlist[number[1]]
+    val dlist = listOf(
+        "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят",
+        "восемьдесят", "девяносто"
+    )
+    val list20 = mutableListOf<String>()
+    for (i in 2..9)
+        for (j in 1..9)
+            list20 += (dlist[i] + " " + mlist[j])
+    val mainlist = mutableListOf<String>()
+    mainlist += mlist
+    var te = 2
+    for (i in 0 until list20.size) {
+        if ((i % 9) == 0) {
+            mainlist += dlist[te]
+            te += 1
+        }
+        mainlist += list20[i]
+    }
+    if (n < 100) {
+        return mainlist[n]
+        //exitProcess(0)
+    }
+    if (number[2] != 0) {
+        if (number[1] != 0) half.removeAt(0)
+        half += mainlist[n % 100]
+    }
+    val d100list = listOf(
+        "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот",
+        "девятьсот"
+    )
+    val mainlist3 = mutableListOf<String>()
+    if (number[3] != 0) {
+        for (i in 1..99)
+            mainlist3 += d100list[number[3]] + " " + mainlist[i]
+        half = mutableListOf<String>()
+        half += (mainlist3[n % 100 - 1])
+    }
+    val d4list = listOf(
+        "ноль",
+        "тысяча",
+        "две тысячи",
+        "три тысячи",
+        "четыре тысячи",
+        "пять тысяч",
+        "шесть тысячи",
+        "семь тысячи",
+        "восемь тысяч",
+        "девять тысяч"
+    )
+    if (a >= 1000) a /= 1000
+    else {
+        return half[0]
+        //exitProcess(0)
+    }
+    while (a > 0) {
+        t += 1
+        number += a % 10
+        a /= 10
+    }
+    a = n / 1000
+    val ch = if (half.isNotEmpty()) 1
+    else
+        0
+    if ((a < 10) && (ch == 1)) {
+        return d4list[a] + " " + half[0]
+        //exitProcess(0)
+    } else if ((a < 10) && (ch == 0)) {
+        return d4list[a]
+        //exitProcess(0)
+    }
+    val d5list = mutableListOf<String>()
+    for (i in 10..19)
+        d5list += mlist[i] + " " + "тысяч"
+    for (i in 20..99)
+        d5list += if (i % 10 == 1) dlist[i / 10] + " одна тысяча"
+        else if (i % 10 == 2) dlist[i / 10] + " две тысячи"
+        else if (i % 10 == 3) dlist[i / 10] + " три тысячи"
+        else if (i % 10 == 4) dlist[i / 10] + " четыре тысячи"
+        else mainlist[i] + " тысяч"
+    if ((a < 100) && (ch == 1)) {
+        return d5list[a - 10] + " " + half[0]
+        //exitProcess(0)
+    } else if ((a < 100) && (ch == 0)) {
+        return d5list[a]
+        //exitProcess(0)
+    }
+    val d6list = mutableListOf<String>(d100list[a / 100] + " тысяч", d100list[a / 100] + " одна тысяча")
+    for (i in 2..9)
+        d6list += d100list[a / 100] + " " + d4list[i]
+    for (i in 0..89)
+        d6list += d100list[a / 100] + " " + d5list[i]
+    if ((a < 1000) && (ch == 1)) {
+        return d6list[a % 100] + " " + half[0]
+        //exitProcess(0)
+    } else if ((a < 1000) && (ch == 0)) {
+        return d6list[a % 100]
+        //exitProcess(0)
+    }
+    return "ноль"
+}

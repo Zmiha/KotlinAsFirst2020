@@ -44,22 +44,12 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
 fun daysInMonth(month: Int, year: Int): Int =
-    if ((month % 2 == 0) && (month != 2) && (month <= 7))
-        30
-    else
-        if ((month % 2 == 1) && (month != 2) && (month <= 7))
-            31
-        else
-            if (month > 7)
-                if (month % 2 == 0)
-                    31
-                else
-                    30
-            else
-                if (((year % 100 != 0) || (year % 400 == 0)) && (year % 4 == 0))
-                    29
-                else
-                    28
+    if ((month % 2 == 0) && (month != 2) && (month <= 7)) 30
+    else if ((month % 2 == 1) && (month != 2) && (month <= 7)) 31
+    else if (month > 7) if (month % 2 == 0) 31
+    else 30
+    else if (((year % 100 != 0) || (year % 400 == 0)) && (year % 4 == 0)) 29
+    else 28
 
 
 /**

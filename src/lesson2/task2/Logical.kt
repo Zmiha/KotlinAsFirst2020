@@ -2,6 +2,7 @@
 
 package lesson2.task2
 
+import kotlin.math.sqrt
 import lesson1.task1.sqr
 
 /**
@@ -18,7 +19,11 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean {
+    val n1 = (number % 10 + ((number % 100 - number % 10) / 10))
+    val n2 = (number / 1000 + (number / 100 - (number / 1000) * 10))
+    return n1 == n2
+}
 
 /**
  * Простая (2 балла)
@@ -48,7 +53,7 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean = ((sqrt(sqr(x2 - x1) + sqr(y2 - y1))) + r1) <= r2
 
 /**
  * Средняя (3 балла)
@@ -59,4 +64,10 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    val n1 = (a * b)
+    val n2 = (b * c)
+    val n3 = (c * a)
+    val o = (r * s)
+    return (n1 <= o) or (n2 <= o) or (n3 <= o)
+}

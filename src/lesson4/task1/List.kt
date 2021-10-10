@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import kotlin.math.sqrt
+
 //import kotlin.system.exitProcess
 
 // Урок 4: списки
@@ -334,18 +335,16 @@ fun russian(n: Int): String {
     a = n
     val mlist = listOf(
         "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
-        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать",
-        "восемнадцать", "девятнадцать"
+        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать",
+        "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
     )
-    if (n < 10) {
+    if (n < 10)
         return mlist[n]
-        //exitProcess(0)
-    }
     var half = mutableListOf<String>()
     if (number[1] != 0) half += mlist[number[1]]
     val dlist = listOf(
-        "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят",
-        "восемьдесят", "девяносто"
+        "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят",
+        "семьдесят", "восемьдесят", "девяносто"
     )
     val list20 = mutableListOf<String>()
     for (i in 2..9)
@@ -361,17 +360,15 @@ fun russian(n: Int): String {
         }
         mainlist += list20[i]
     }
-    if (n < 100) {
+    if (n < 100)
         return mainlist[n]
-        //exitProcess(0)
-    }
     if (number[2] != 0) {
         if (number[1] != 0) half.removeAt(0)
         half += mainlist[n % 100]
     }
     val d100list = listOf(
-        "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот",
-        "девятьсот"
+        "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот",
+        "восемьсот", "девятьсот"
     )
     val mainlist3 = mutableListOf<String>()
     if (number[3] != 0) {
@@ -393,10 +390,8 @@ fun russian(n: Int): String {
         "девять тысяч"
     )
     if (a >= 1000) a /= 1000
-    else {
+    else
         return half[0]
-        //exitProcess(0)
-    }
     while (a > 0) {
         t += 1
         number += a % 10
@@ -406,13 +401,10 @@ fun russian(n: Int): String {
     val ch = if (half.isNotEmpty()) 1
     else
         0
-    if ((a < 10) && (ch == 1)) {
+    if ((a < 10) && (ch == 1))
         return d4list[a] + " " + half[0]
-        //exitProcess(0)
-    } else if ((a < 10) && (ch == 0)) {
+    else if ((a < 10) && (ch == 0))
         return d4list[a]
-        //exitProcess(0)
-    }
     val d5list = mutableListOf<String>()
     for (i in 10..19)
         d5list += mlist[i] + " " + "тысяч"
@@ -422,24 +414,19 @@ fun russian(n: Int): String {
         else if (i % 10 == 3) dlist[i / 10] + " три тысячи"
         else if (i % 10 == 4) dlist[i / 10] + " четыре тысячи"
         else mainlist[i] + " тысяч"
-    if ((a < 100) && (ch == 1)) {
+    if ((a < 100) && (ch == 1))
         return d5list[a - 10] + " " + half[0]
-        //exitProcess(0)
-    } else if ((a < 100) && (ch == 0)) {
+    else if ((a < 100) && (ch == 0))
         return d5list[a]
-        //exitProcess(0)
-    }
     val d6list = mutableListOf<String>(d100list[a / 100] + " тысяч", d100list[a / 100] + " одна тысяча")
     for (i in 2..9)
         d6list += d100list[a / 100] + " " + d4list[i]
     for (i in 0..89)
         d6list += d100list[a / 100] + " " + d5list[i]
-    if ((a < 1000) && (ch == 1)) {
+    if ((a < 1000) && (ch == 1))
         return d6list[a % 100] + " " + half[0]
-        //exitProcess(0)
-    } else if ((a < 1000) && (ch == 0)) {
+    else if ((a < 1000) && (ch == 0))
         return d6list[a % 100]
-        //exitProcess(0)
-    }
+
     return "ноль"
 }

@@ -5,6 +5,8 @@ package lesson2.task1
 import lesson1.task1.discriminant
 import kotlin.math.max
 import kotlin.math.sqrt
+import kotlin.math.min
+
 
 // Урок 2: ветвления (здесь), логический тип (см. 2.2).
 // Максимальное количество баллов = 6
@@ -127,10 +129,11 @@ fun rookOrBishopThreatens(
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    return if ((a + b > c) && (a + c > b) && (b + c > a)) {
+    val max = maxOf(a, b, c)
+    return if (((a + b + c) / max) > 2) {
         when {
-            (a * a + b * b == c * c) || (b * b + c * c == a * a) || (c * c + a * a == b * b) -> 1
-            (a * a + b * b > c * c) && (b * b + c * c > a * a) && (c * c + a * a > b * b) -> 0
+            ((a * a + b * b + c * c) / (max * max)) > 2.0 -> 0
+            ((a * a + b * b + c * c) / (max * max)) == 2.0 -> 1
             else -> 2
         }
     } else -1
@@ -145,12 +148,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Если пересечения нет, вернуть -1.
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    return when {
-        ((c > a) and (c < b) and (d > a) and (d > b)) -> b - c
-        ((c > a) and (c < b) and (d > a) and (d < b)) -> d - c
-        ((a > c) and (a < d) and (b > c) and (b < d)) -> b - a
-        ((c < a) and (c < b) and (d > a) and (d < b)) -> d - a
-        ((b == c) or (a == d)) -> 0
-        else -> -1
-    }
+    return if ((b < c) || (d <= a)) {
+        -1
+    } else (min(b, d) - max(a, c))
 }

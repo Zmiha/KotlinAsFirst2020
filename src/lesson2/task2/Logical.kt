@@ -69,5 +69,5 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val n2 = (b * c)
     val n3 = (c * a)
     val o = (r * s)
-    return (n1 <= o) or (n2 <= o) or (n3 <= o)
+    return (n1 <= o) || (n2 <= o) || (n3 <= o)
 }

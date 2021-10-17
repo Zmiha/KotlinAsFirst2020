@@ -96,7 +96,7 @@ fun fib(n: Int): Int {
     var n2 = 1
     var i = 0
     while (i < n - 2) {
-        var sum = n1 + n2
+        val sum = n1 + n2
         n1 = n2
         n2 = sum
         i += 1
@@ -114,7 +114,7 @@ fun minDivisor(n: Int): Int {
         if (n % i == 0)
             return (i)
     }
-    return (n)
+    return n
 }
 
 /**
@@ -125,9 +125,9 @@ fun minDivisor(n: Int): Int {
 fun maxDivisor(n: Int): Int {
     for (i in n / 2 downTo 1) {
         if (n % i == 0)
-            return (i)
+            return i
     }
-    return (1)
+    return 1
 }
 
 /**
@@ -155,8 +155,9 @@ fun collatzSteps(x: Int): Int = TODO()
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    for (i in max(n, m)..n * m step (max(n, m))) {
-        if ((i % n == 0) and (i % m == 0)) return i
+    val max = max(n, m)
+    for (i in max..n * m step (max)) {
+        if ((i % n == 0) && (i % m == 0)) return i
     }
     return n * m
 }
@@ -170,7 +171,7 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
     for (i in 2..min(n, m)) {
-        if ((n % i == 0) and (m % i == 0)) return false
+        if ((n % i == 0) && (m % i == 0)) return false
     }
     return true
 }

@@ -126,19 +126,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     val m = maxOf(a, b, c)
     val st1 = if (m == a)
         b
-    else
-        a
+    else a
     val st2 = a + b + c - st1 - m
     return if (m > st1 + st2)
         -1
-    else
-        if (m * m < st1 * st1 + st2 * st2)
-            0
-        else
-            if (m * m == st1 * st1 + st2 * st2)
-                1
-            else
-                2
+    else if (m * m < st1 * st1 + st2 * st2)
+        0
+    else if (m * m == st1 * st1 + st2 * st2)
+        1
+    else 2
 }
 
 /**
@@ -153,14 +149,10 @@ fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int =
     if ((c >= a) && (c <= b))
         if (d < b)
             d - c
-        else
-            b - c
-    else
-        if ((a >= c) && (a <= d))
-            if (b < d)
-                b - a
-            else
-                d - a
-        else
-            -1
+        else b - c
+    else if ((a >= c) && (a <= d))
+        if (b < d)
+            b - a
+        else d - a
+    else -1
 

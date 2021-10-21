@@ -246,72 +246,15 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
 fun roman(n: Int): String {
     var str = ""
     var a = n
-    while (a > 0) {
-        if ((a - 1000) >= 0) {
-            str += "M"
-            a -= 1000
-            continue
+    var t = 0
+    val lat = listOf(1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1)
+    val rom = listOf("M", "CM","D","CD", "C", "XC","L", "XL", "X","IX", "V", "IV","I")
+    for (element in lat) {
+        while (a - element >= 0) {
+            a -= element
+            str += rom[t]
         }
-        if ((a - 900) >= 0) {
-            str += "CM"
-            a -= 900
-            continue
-        }
-        if ((a - 500) >= 0) {
-            str += "D"
-            a -= 500
-            continue
-        }
-        if ((a - 400) >= 0) {
-            str += "CD"
-            a -= 400
-            continue
-        }
-        if ((a - 100) >= 0) {
-            str += "C"
-            a -= 100
-            continue
-        }
-        if ((a - 90) >= 0) {
-            str += "XC"
-            a -= 90
-            continue
-        }
-        if ((a - 50) >= 0) {
-            str += "L"
-            a -= 50
-            continue
-        }
-        if ((a - 40) >= 0) {
-            str += "XL"
-            a -= 40
-            continue
-        }
-        if ((a - 10) >= 0) {
-            str += "X"
-            a -= 10
-            continue
-        }
-        if ((a - 9) >= 0) {
-            str += "IX"
-            a -= 9
-            continue
-        }
-        if ((a - 5) >= 0) {
-            str += "V"
-            a -= 5
-            continue
-        }
-        if ((a - 4) >= 0) {
-            str += "IV"
-            a -= 4
-            continue
-        }
-        if ((a - 1) >= 0) {
-            str += "I"
-            a -= 1
-            continue
-        }
+        t += 1
     }
     return str
 }

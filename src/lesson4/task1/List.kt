@@ -127,7 +127,17 @@ fun abs(v: List<Double>): Double = TODO()
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun mean(list: List<Double>): Double {
+    var sum = 0.0
+    var i = 0
+    if (list.isEmpty()) return 0.0
+    else
+        for (element in list) {
+            sum += element
+            i += 1
+        }
+    return (sum / i)
+}
 
 /**
  * Средняя (3 балла)

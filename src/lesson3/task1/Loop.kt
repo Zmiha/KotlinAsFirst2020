@@ -208,29 +208,19 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun sqr(n: Int): Int = n * n
-fun squareSequenceDigit(n: Int): Int? {
-    var c = 0
+fun squareSequenceDigit(n: Int): Int {
+    val a = mutableListOf(0)
     var k = 0
     var t = 0
-    for (i in 1..n) {
-        k += 1
-        var ch1 = sqr(k)
-        while (ch1 > 0) {
-            t += 1
-            ch1 /= 10
-        }
-        if (n == k) break
-    }
-    val a = arrayOfNulls<Int>(n + t)
-    k = 0
-    t = 0
+    var c = 0
     while (c < n) {
         k += 1
         var ch = sqr(k)
-        while (ch > 0){
+        while (ch > 0) {
             c += 1
             t += 1
             ch /= 10
+            a.add(c, 0)
         }
         ch = sqr(k)
         for (i in 0 until t) {
@@ -251,22 +241,11 @@ fun squareSequenceDigit(n: Int): Int? {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int? {
-    var c = 0
+fun fibSequenceDigit(n: Int): Int {
+    val a = mutableListOf(0)
     var k = 0
     var t = 0
-    for (i in 1..n) {
-        k += 1
-        var ch1 = sqr(k)
-        while (ch1 > 0) {
-            t += 1
-            ch1 /= 10
-        }
-        if (n == k) break
-    }
-    val a = arrayOfNulls<Int>(n + t)
-    k = 0
-    t = 0
+    var c = 0
     while (c < n) {
         k += 1
         var ch = fib(k)
@@ -274,6 +253,7 @@ fun fibSequenceDigit(n: Int): Int? {
             c += 1
             t += 1
             ch /= 10
+            a.add(c, 0)
         }
         ch = fib(k)
         for (i in 0 until t) {

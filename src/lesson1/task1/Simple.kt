@@ -66,7 +66,7 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = (hours * 3600 + minutes * 60 + seconds)
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 3600 + minutes * 60 + seconds
 
 /**
  * Тривиальная (1 балл)
@@ -84,7 +84,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(deg: Int, min: Int, sec: Int): Double = ((deg + (min / 60) + (sec / 60)) * PI / 180 )
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double = ((deg + (min / 60) + (sec / 60)) * PI / 180)
 
 /**
  * Тривиальная (1 балл)
@@ -92,7 +92,7 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double = ((deg + (min / 60) + (
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = (sqrt((sqr(x2 - x1)) + (sqr(y2 - y1))))
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = sqrt((sqr(x2 - x1)) + (sqr(y2 - y1)))
 
 /**
  * Простая (2 балла)
@@ -100,7 +100,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = (sqrt(
  * Пользователь задает целое число, большее 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int = ((number % 1000) / 100)
+fun thirdDigit(number: Int): Int = (number % 1000) / 100
 
 /**
  * Простая (2 балла)
@@ -110,7 +110,7 @@ fun thirdDigit(number: Int): Int = ((number % 1000) / 100)
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int =
-    (((hoursArrive - hoursDepart - 1) * 60) + 60 + minutesArrive - minutesDepart)
+    ((hoursArrive - hoursDepart - 1) * 60) + 60 + minutesArrive - minutesDepart
 
 /**
  * Простая (2 балла)
@@ -131,5 +131,5 @@ fun numberRevert(number: Int): Int {
     val n1 = (number % 10)
     val n2 = (number % 100 / 10)
     val n3 = (number / 100)
-    return (n1 * 100 + n2 * 10 + n3)
+    return n1 * 100 + n2 * 10 + n3
 }

@@ -156,7 +156,7 @@ fun collatzSteps(x: Int): Int = TODO()
  */
 fun lcm(m: Int, n: Int): Int {
     val max = max(n, m)
-    for (i in max..n * m step (max)) {
+    for (i in max..n * m step max) {
         if ((i % n == 0) && (i % m == 0)) return i
     }
     return n * m

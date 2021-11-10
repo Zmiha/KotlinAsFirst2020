@@ -84,7 +84,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(deg: Int, min: Int, sec: Int): Double = ((deg + (min / 60) + (sec / 60)) * PI / 180)
+fun angleInRadian(deg: Int, min: Int, sec: Int): Double = (deg * 60 * 60 + min * 60 + sec) * PI / 180 / 3600
 
 /**
  * Тривиальная (1 балл)
@@ -119,7 +119,10 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double {
+    val p = percent * 0.01 + 1
+    return (initial * p * p * p)
+}
 
 /**
  * Простая (2 балла)

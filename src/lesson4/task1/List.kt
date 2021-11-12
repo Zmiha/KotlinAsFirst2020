@@ -200,7 +200,18 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> {
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    val result = mutableListOf<Int>()
+    var t = n
+    for (i in 2..n) {
+        if (t % i == 0)
+            while (t % i == 0) {
+                result.add(i)
+                t /= i
+            }
+    }
+    return result
+}
 
 /**
  * Сложная (4 балла)
@@ -209,7 +220,18 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String {
+    val result = mutableListOf<Int>()
+    var t = n
+    for (i in 2..n) {
+        if (t % i == 0)
+            while (t % i == 0) {
+                result.add(i)
+                t /= i
+            }
+    }
+    return result.joinToString(separator = "*")
+}
 
 /**
  * Средняя (3 балла)
@@ -255,7 +277,6 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * (например, str.toInt(base)), запрещается.
  */
 fun decimalFromString(str: String, base: Int): Int = TODO()
-
 /**
  * Сложная (5 баллов)
  *

@@ -162,7 +162,18 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val splitdescription = description.split("; ", " ")
+    val map = mutableMapOf<String, Double>()
+    return try {
+        for (i in 0 until splitdescription.size step 2)
+            map[splitdescription[i]] = splitdescription[i + 1].toDouble()
+        val max = map.maxByOrNull { it.value }
+        max!!.key
+    } catch (e: Exception) {
+        ""
+    }
+}
 
 /**
  * Сложная (6 баллов)
@@ -175,7 +186,28 @@ fun mostExpensive(description: String): String = TODO()
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    val alf = mapOf(
+        "M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100, "XC" to 90, "L" to 50,
+        "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1
+    )
+    var simvols: String
+    var danoroman = "$roman/"
+    var sum = 0
+    while (danoroman != "/") {
+        var k = 1
+        simvols = danoroman[0].toString()
+        while (simvols + danoroman[k] in alf.keys) {
+            simvols += danoroman[k]
+            k += 1
+        }
+        if (alf[simvols] in alf.values) sum += alf[simvols]!!
+        val t = danoroman.count() - simvols.count()
+        danoroman = danoroman.takeLast(t)
+        if (alf[simvols] !in alf.values) return -1
+    }
+    return sum
+}
 
 /**
  * Очень сложная (7 баллов)

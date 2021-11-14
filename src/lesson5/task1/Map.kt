@@ -283,14 +283,14 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     templist += list
     if (max == null) return Pair(-1, -1)
     val indexs = mutableMapOf<Int, Int>()
-    for (i in 1..max)
+    for (i in 0..max)
         while (i in templist) {
             val ind = templist.indexOf(i)
             indexs[i] = ind
             templist.removeAt(ind)
             templist.add(ind, -1)
         }
-    for (i in 1..max)
+    for (i in 0..max)
         for (k in i..max)
             if (i != k)
                 if (i + k == number) return Pair(indexs[i]!!, indexs[k]!!)

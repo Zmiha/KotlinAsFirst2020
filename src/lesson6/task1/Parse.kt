@@ -2,6 +2,7 @@
 
 package lesson6.task1
 
+import kotlinx.html.A
 import lesson2.task2.daysInMonth
 
 // Урок 6: разбор строк, исключения
@@ -124,7 +125,39 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    var num1 = "0"
+    var num2 = "0"
+    var num3 = "0"
+    var mounth = "0"
+    val parts = digital.split(".")
+    if (parts.size == 3) {
+        if (parts[0].toInt() in 1..31) num1 = parts[0]
+        if (parts[2] != "0") num3 = parts[2]
+        try {
+            mounth = when (parts[1]) {
+                "01" -> "января"
+                "02" -> "февраля"
+                "03" -> "марта"
+                "04" -> "апреля"
+                "05" -> "мая"
+                "06" -> "апреля"
+                "07" -> "июля"
+                "08" -> "августа"
+                "09" -> "сентября"
+                "10" -> "октября"
+                "11" -> "ноября"
+                "12" -> "декабря"
+                else -> "0"
+            }
+            if (mounth.toInt() in 1..12) num2 = mounth
+        } catch (e: Exception) {
+            return ""
+        }
+    }
+    if (num1.toInt() == 0 || num2.toInt() == 0 || num3.toInt() == 0) return ""
+    return "$num1 $num2 $num3"
+}
 
 /**
  * Средняя (4 балла)

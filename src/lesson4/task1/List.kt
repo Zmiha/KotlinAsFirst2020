@@ -269,110 +269,107 @@ fun roman(n: Int): String {
 fun russian(n: Int): String {
     var n0 = n
     var t = 0
-    val number = mutableListOf<Int>(-1)
+    val number = mutableListOf(-1)
     while (n0 > 0) {
         t += 1
         number += n0 % 10
         n0 /= 10
     }
     n0 = n
-    try {
-        val glavniylist = listOf(
-            "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
-            "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать",
-            "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
-        )
-        val listdesyatok = listOf(
-            "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят",
-            "семьдесят", "восемьдесят", "девяносто"
-        )
-        val listsoten = listOf(
-            "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот",
-            "восемьсот", "девятьсот"
-        )
-        val listtisach = listOf(
-            "ноль",
-            "тысяча",
-            "две тысячи",
-            "три тысячи",
-            "четыре тысячи",
-            "пять тысяч",
-            "шесть тысяч",
-            "семь тысяч",
-            "восемь тысяч",
-            "девять тысяч"
-        )
-        if (n < 10)
-            return glavniylist[n]
-        var half = mutableListOf<String>()
-        if (number[1] != 0) half += glavniylist[number[1]]
-        val listdo20 = mutableListOf<String>()
-        for (i in 2..9)
-            for (j in 1..9)
-                listdo20 += (listdesyatok[i] + " " + glavniylist[j])
-        val mainlist = mutableListOf<String>()
-        mainlist += glavniylist
-        var te = 2
-        for (i in 0 until listdo20.size) {
-            if ((i % 9) == 0) {
-                mainlist += listdesyatok[te]
-                te += 1
-            }
-            mainlist += listdo20[i]
+    val glavniylist = listOf(
+        "ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
+        "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать",
+        "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
+    )
+    val listdesyatok = listOf(
+        "ноль", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят",
+        "семьдесят", "восемьдесят", "девяносто"
+    )
+    val listsoten = listOf(
+        "ноль", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот",
+        "восемьсот", "девятьсот"
+    )
+    val listtisach = listOf(
+        "ноль",
+        "тысяча",
+        "две тысячи",
+        "три тысячи",
+        "четыре тысячи",
+        "пять тысяч",
+        "шесть тысяч",
+        "семь тысяч",
+        "восемь тысяч",
+        "девять тысяч"
+    )
+    if (n < 10)
+        return glavniylist[n]
+    var half = mutableListOf<String>()
+    if (number[1] != 0) half += glavniylist[number[1]]
+    val listdo20 = mutableListOf<String>()
+    for (i in 2..9)
+        for (j in 1..9)
+            listdo20 += (listdesyatok[i] + " " + glavniylist[j])
+    val mainlist = mutableListOf<String>()
+    mainlist += glavniylist
+    var te = 2
+    for (i in 0 until listdo20.size) {
+        if ((i % 9) == 0) {
+            mainlist += listdesyatok[te]
+            te += 1
         }
-        if (n < 100)
-            return mainlist[n]
-        if (number[2] != 0) {
-            if (number[1] != 0) half.removeAt(0)
-            half += mainlist[n % 100]
-        }
-        val mainlistdo100 = mutableListOf<String>()
-        if (number[3] != 0) {
-            for (i in 1..99)
-                mainlistdo100 += listsoten[number[3]] + " " + mainlist[i]
-            half = mutableListOf<String>()
-            half += (mainlistdo100[n % 100 - 1])
-        }
-        if (n0 >= 1000) n0 /= 1000
-        else
-            return half[0]
-        while (n0 > 0) {
-            t += 1
-            number += n0 % 10
-            n0 /= 10
-        }
-        n0 = n / 1000
-        val ch = if (half.isNotEmpty()) 1
-        else
-            0
-        if ((n0 < 10) && (ch == 1))
-            return listtisach[n0] + " " + half[0]
-        else if ((n0 < 10) && (ch == 0))
-            return listtisach[n0]
-        val listdotisach = mutableListOf<String>()
-        for (i in 10..19)
-            listdotisach += glavniylist[i] + " " + "тысяч"
-        for (i in 20..99)
-            listdotisach += if (i % 10 == 1) listdesyatok[i / 10] + " одна тысяча"
-            else if (i % 10 == 2) listdesyatok[i / 10] + " две тысячи"
-            else if (i % 10 == 3) listdesyatok[i / 10] + " три тысячи"
-            else if (i % 10 == 4) listdesyatok[i / 10] + " четыре тысячи"
-            else mainlist[i] + " тысяч"
-        if ((n0 < 100) && (ch == 1))
-            return listdotisach[n0 - 10] + " " + half[0]
-        else if ((n0 < 100) && (ch == 0))
-            return listdotisach[n0]
-        val itogoviylist = mutableListOf<String>(listsoten[n0 / 100] + " тысяч", listsoten[n0 / 100] + " одна тысяча")
-        for (i in 2..9)
-            itogoviylist += listsoten[n0 / 100] + " " + listtisach[i]
-        for (i in 0..89)
-            itogoviylist += listsoten[n0 / 100] + " " + listdotisach[i]
-        if ((n0 < 1000) && (ch == 1))
-            return itogoviylist[n0 % 100] + " " + half[0]
-        else if ((n0 < 1000) && (ch == 0))
-            return itogoviylist[n0 % 100]
-    } catch (e: Exception) {
-        return "ноль"
+        mainlist += listdo20[i]
     }
+    if (n < 100)
+        return mainlist[n]
+    if (number[2] != 0) {
+        if (number[1] != 0) half.removeAt(0)
+        half += mainlist[n % 100]
+    }
+    val mainlistdo1000 = mutableListOf<String>()
+    if (number[3] != 0) {
+        for (i in 1..99)
+            mainlistdo1000 += listsoten[number[3]] + " " + mainlist[i]
+        half = mutableListOf()
+        half += if (n % 100 == 0) listsoten[number[3]]
+        else (mainlistdo1000[n % 100 - 1])
+    }
+    if (n0 >= 1000) n0 /= 1000
+    else
+        return half[0]
+    while (n0 > 0) {
+        t += 1
+        number += n0 % 10
+        n0 /= 10
+    }
+    n0 = n / 1000
+    val ch = if (half.isNotEmpty()) 1
+    else
+        0
+    if ((n0 < 10) && (ch == 1))
+        return listtisach[n0] + " " + half[0]
+    else if ((n0 < 10) && (ch == 0))
+        return listtisach[n0]
+    val listdomilliona = mutableListOf<String>()
+    for (i in 10..19)
+        listdomilliona += glavniylist[i] + " " + "тысяч"
+    for (i in 20..99)
+        listdomilliona += if (i % 10 == 1) listdesyatok[i / 10] + " одна тысяча"
+        else if (i % 10 == 2) listdesyatok[i / 10] + " две тысячи"
+        else if (i % 10 == 3) listdesyatok[i / 10] + " три тысячи"
+        else if (i % 10 == 4) listdesyatok[i / 10] + " четыре тысячи"
+        else mainlist[i] + " тысяч"
+    if ((n0 < 100) && (ch == 1))
+        return listdomilliona[n0 - 10] + " " + half[0]
+    else if ((n0 < 100) && (ch == 0))
+        return listdomilliona[n0]
+    val itogoviylist = mutableListOf(listsoten[n0 / 100] + " тысяч", listsoten[n0 / 100] + " одна тысяча")
+    for (i in 2..9)
+        itogoviylist += listsoten[n0 / 100] + " " + listtisach[i]
+    for (i in 0..89)
+        itogoviylist += listsoten[n0 / 100] + " " + listdomilliona[i]
+    if ((n0 < 1000) && (ch == 1))
+        return itogoviylist[n0 % 100] + " " + half[0]
+    else if ((n0 < 1000) && (ch == 0))
+        return itogoviylist[n0 % 100]
     return "ноль"
 }

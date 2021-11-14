@@ -2,6 +2,9 @@
 
 package lesson5.task1
 
+import kotlin.math.max
+import kotlin.math.min
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -279,21 +282,11 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  */
 fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
     try {
-        val templist = mutableListOf<Int>()
-        val max = list.maxOrNull()
-        templist += list
-        val indexs = mutableMapOf<Int, Int>()
-        for (i in 0..max!!)
-            while (i in templist) {
-                val ind = templist.indexOf(i)
-                indexs[i] = ind
-                templist.removeAt(ind)
-                templist.add(ind, -1)
-            }
-        for (i in 0..max)
-            for (k in i..max)
-                if (i != k)
-                    if (i + k == number) return Pair(indexs[i]!!, indexs[k]!!)
+        for (i in 0..list.size)
+            for (j in i..list.size)
+                if (i != j)
+                    if (list[i] + list[j] == number)
+                        return Pair(min(i, j), max(i, j))
     } catch (e: Exception) {
         return Pair(-1, -1)
     }

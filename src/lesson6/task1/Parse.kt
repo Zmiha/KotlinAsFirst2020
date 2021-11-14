@@ -84,33 +84,33 @@ fun dateStrToDigit(str: String): String {
     } else {
         parts[0]
     }
-    if (parts.size != 3) {
-        return ""
-    }
-    try {
-        mounth = when (parts[1]) {
-            "января" -> "01"
-            "февраля" -> "02"
-            "марта" -> "03"
-            "апреля" -> "04"
-            "мая" -> "05"
-            "июня" -> "06"
-            "июля" -> "07"
-            "августа" -> "08"
-            "сентября" -> "09"
-            "октября" -> "10"
-            "ноября" -> "11"
-            "декабря" -> "12"
-            else -> "0"
+    if (parts.size == 3) {
+        try {
+            mounth = when (parts[1]) {
+                "января" -> "01"
+                "февраля" -> "02"
+                "марта" -> "03"
+                "апреля" -> "04"
+                "мая" -> "05"
+                "июня" -> "06"
+                "июля" -> "07"
+                "августа" -> "08"
+                "сентября" -> "09"
+                "октября" -> "10"
+                "ноября" -> "11"
+                "декабря" -> "12"
+                else -> "0"
+            }
+            if (mounth == "0") return ""
+        } catch (e: Exception) {
+            return ""
         }
-        if (mounth == "0") return ""
-    } catch (e: Exception) {
-        return ""
+        val num3 = parts[2]
+        if (num1.toInt() < 1 || num1.toInt() > daysInMonth(mounth.toInt(), num3.toInt()))
+            return ""
+        return "$num1.$mounth.$num3"
     }
-    val num3 = parts[2]
-    if (num1.toInt() < 1 || num1.toInt() > daysInMonth(mounth.toInt(), num3.toInt()))
-        return ""
-    return "$num1.$mounth.$num3"
+    return ""
 }
 
 
@@ -124,7 +124,9 @@ fun dateStrToDigit(str: String): String {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+
+}
 
 /**
  * Средняя (4 балла)

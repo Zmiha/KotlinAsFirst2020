@@ -78,15 +78,15 @@ fun main() {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(" ")      //Разбиваем на части
-    val mounth: String
-    val num1: String = if (parts[0].length == 1) {
+    val month: String
+    val num1 = if (parts[0].length == 1) {
         "0" + parts[0]
     } else {
         parts[0]
     }
     if (parts.size == 3) {
         try {
-            mounth = when (parts[1]) {
+            month = when (parts[1]) {
                 "января" -> "01"
                 "февраля" -> "02"
                 "марта" -> "03"
@@ -101,14 +101,14 @@ fun dateStrToDigit(str: String): String {
                 "декабря" -> "12"
                 else -> "0"
             }
-            if (mounth == "0") return ""
+            if (month == "0") return ""
         } catch (e: Exception) {
             return ""
         }
         val num3 = parts[2]
-        if (num1.toInt() < 1 || num1.toInt() > daysInMonth(mounth.toInt(), num3.toInt()))
+        if (num1.toInt() < 1 || num1.toInt() > daysInMonth(month.toInt(), num3.toInt()))
             return ""
-        return "$num1.$mounth.$num3"
+        return "$num1.$month.$num3"
     }
     return ""
 }

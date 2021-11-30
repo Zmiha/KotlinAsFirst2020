@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import kotlin.math.pow
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -208,28 +209,57 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun sqr(n: Int): Int = n * n
-fun squareSequenceDigit(n: Int): Int {
-    val a = mutableListOf(0)
-    var k = 0
-    var t = 0
-    var c = 0
-    while (c < n) {
-        k += 1
-        var ch = sqr(k)
-        while (ch > 0) {
-            c += 1
-            t += 1
-            ch /= 10
-            a.add(c, 0)
-        }
-        ch = sqr(k)
-        for (i in 0 until t) {
-            a[c - i] = ch % 10
-            ch /= 10
-        }
-        t = 0
+fun inversion(n: Int): Int {
+    var a = 0
+    var x = n
+    var raz = -1.0
+    while (x > 0) {
+        raz++
+        x /= 10
     }
-    return a[n]
+    x = n
+    while (x > 0) {
+        a += (x % 10) * (10.0.pow(raz).toInt())
+        x /= 10
+        raz--
+    }
+    return a
+}
+
+fun squareSequenceDigit(n: Int): Int {
+    var schetchick = 0
+    var t = 0
+    while (n > 0) {
+        var countch = 0
+        var countinv = 0
+        schetchick++
+        var ch = sqr(schetchick)
+        var invch = inversion(ch)
+        while (ch > 0) {
+            countch++
+            ch /= 10
+        }
+        ch = sqr(schetchick)
+        while (invch > 0) {
+            countinv++
+            invch /= 10
+        }
+        invch = inversion(ch)
+        var raz = countch - countinv
+        while (raz > 0) {
+            t++
+            if (t == n)
+                return 0
+            raz--
+        }
+        while (invch > 0) {
+            t++
+            if (t == n)
+                return invch % 10
+            invch /= 10
+        }
+    }
+    return 0
 }
 
 /**
@@ -242,25 +272,37 @@ fun squareSequenceDigit(n: Int): Int {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun fibSequenceDigit(n: Int): Int {
-    val a = mutableListOf(0)
-    var k = 0
+    var schetchick = 0
     var t = 0
-    var c = 0
-    while (c < n) {
-        k += 1
-        var ch = fib(k)
+    while (n > 0) {
+        var countch = 0
+        var countinv = 0
+        schetchick++
+        var ch = fib(schetchick)
+        var invch = inversion(ch)
         while (ch > 0) {
-            c += 1
-            t += 1
-            ch /= 10
-            a.add(c, 0)
-        }
-        ch = fib(k)
-        for (i in 0 until t) {
-            a[c - i] = ch % 10
+            countch++
             ch /= 10
         }
-        t = 0
+        ch = fib(schetchick)
+        while (invch > 0) {
+            countinv++
+            invch /= 10
+        }
+        invch = inversion(ch)
+        var raz = countch - countinv
+        while (raz > 0) {
+            t++
+            if (t == n)
+                return 0
+            raz--
+        }
+        while (invch > 0) {
+            t++
+            if (t == n)
+                return invch % 10
+            invch /= 10
+        }
     }
-    return a[n]
+    return 0
 }

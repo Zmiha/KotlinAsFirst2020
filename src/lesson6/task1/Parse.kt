@@ -137,7 +137,7 @@ fun dateDigitToStr(digital: String): String {
     if (num1.toInt() < 1 || num1.toInt() > daysInMonth(num2, num3)) {
         return ""
     }
-    val month = when (parts[1].toInt()) {
+    val month = when (parts[1].toIntOrNull()) {
         1 -> "января"
         2 -> "февраля"
         3 -> "марта"

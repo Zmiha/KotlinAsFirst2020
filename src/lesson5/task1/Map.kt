@@ -16,7 +16,7 @@ package lesson5.task1
  */
 fun shoppingListCost(
     shoppingList: List<String>,
-    costs: Map<String, Double>
+    costs: Map<String, Double>,
 ): Double {
     var totalCost = 0.0
 
@@ -38,7 +38,7 @@ fun shoppingListCost(
  */
 fun filterByCountryCode(
     phoneBook: MutableMap<String, String>,
-    countryCode: String
+    countryCode: String,
 ) {
     val namesToRemove = mutableListOf<String>()
 
@@ -61,7 +61,7 @@ fun filterByCountryCode(
  */
 fun removeFillerWords(
     text: List<String>,
-    vararg fillerWords: String
+    vararg fillerWords: String,
 ): List<String> {
     val fillerWordSet = setOf(*fillerWords)
 
@@ -96,20 +96,13 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
-/**{
-    var i = 1
-    var result = mutableMapOf<Int, List<String>>()
-    for (i in result) {
-        val result = i
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    val results = mutableMapOf<Int, MutableList<String>>()
+    for ((i, k) in grades) {
+        results.getOrPut(k) { mutableListOf() }.add(i)
     }
-    for (i in grades) {
-        if (grades == i) {
-
-        }
-    }
+    return results
 }
-**/
 
 /**
  * Простая (2 балла)
@@ -196,7 +189,7 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String = TODO()
 
 /**
  * Средняя (3 балла)

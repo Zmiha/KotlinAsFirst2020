@@ -209,15 +209,19 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun sqr(n: Int): Int = n * n
+fun count(n: Int): Int {
+    var temp = n
+    var c = 0
+    while (temp > 0) {
+        c++
+        temp /= 10
+    }
+    return c
+}
 fun inversion(n: Int): Int {
     var a = 0
     var x = n
-    var raz = -1.0
-    while (x > 0) {
-        raz++
-        x /= 10
-    }
-    x = n
+    var raz = -1.0 + count(x)
     while (x > 0) {
         a += (x % 10) * (10.0.pow(raz).toInt())
         x /= 10
@@ -230,33 +234,23 @@ fun squareSequenceDigit(n: Int): Int {
     var schetchick = 0
     var t = 0
     while (n > 0) {
-        var countch = 0
-        var countinv = 0
         schetchick++
-        var ch = sqr(schetchick)
-        var invch = inversion(ch)
-        while (ch > 0) {
-            countch++
-            ch /= 10
-        }
-        ch = sqr(schetchick)
-        while (invch > 0) {
-            countinv++
-            invch /= 10
-        }
-        invch = inversion(ch)
+        val ch = sqr(schetchick)
+        var invch = inversion((ch))
+        val countch = count(ch)
+        val countinv = count(invch)
         var raz = countch - countinv
-        while (raz > 0) {
-            t++
-            if (t == n)
-                return 0
-            raz--
-        }
         while (invch > 0) {
             t++
             if (t == n)
                 return invch % 10
             invch /= 10
+        }
+        while (raz > 0) {
+            t++
+            if (t == n)
+                return 0
+            raz--
         }
     }
     return 0
@@ -275,33 +269,23 @@ fun fibSequenceDigit(n: Int): Int {
     var schetchick = 0
     var t = 0
     while (n > 0) {
-        var countch = 0
-        var countinv = 0
         schetchick++
-        var ch = fib(schetchick)
-        var invch = inversion(ch)
-        while (ch > 0) {
-            countch++
-            ch /= 10
-        }
-        ch = fib(schetchick)
-        while (invch > 0) {
-            countinv++
-            invch /= 10
-        }
-        invch = inversion(ch)
+        val ch = fib(schetchick)
+        var invch = inversion((ch))
+        val countch = count(ch)
+        val countinv = count(invch)
         var raz = countch - countinv
-        while (raz > 0) {
-            t++
-            if (t == n)
-                return 0
-            raz--
-        }
         while (invch > 0) {
             t++
             if (t == n)
                 return invch % 10
             invch /= 10
+        }
+        while (raz > 0) {
+            t++
+            if (t == n)
+                return 0
+            raz--
         }
     }
     return 0

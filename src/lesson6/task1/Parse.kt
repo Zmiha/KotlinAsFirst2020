@@ -134,10 +134,10 @@ fun dateDigitToStr(digital: String): String {
     if (num1 == null || num1 < 1 || num2 == null || num2 < 1 ||
         num3 == null || num3 < 1
     ) return ""
-    if (num1.toInt() < 1 || num1.toInt() > daysInMonth(num2, num3)) {
+    if (num1 < 1 || num1 > daysInMonth(num2, num3)) {
         return ""
     }
-    val mounth = when (parts[1]) {
+    val month = when (parts[1]) {
         "01" -> "января"
         "02" -> "февраля"
         "03" -> "марта"
@@ -152,7 +152,7 @@ fun dateDigitToStr(digital: String): String {
         "12" -> "декабря"
         else -> "0"
     }
-    return "$num1 $mounth $num3"
+    return "$num1 $month $num3"
 }
 
 /**

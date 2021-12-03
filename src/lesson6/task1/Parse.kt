@@ -84,7 +84,7 @@ fun dateStrToDigit(str: String): String {
     } else {
         parts[0]
     }
-    if (parts.size == 3) {
+    if (parts.size != 3) return "" else {
         try {
             month = when (parts[1]) {
                 "января" -> "01"
@@ -110,7 +110,6 @@ fun dateStrToDigit(str: String): String {
             return ""
         return "$num1.$month.$num3"
     }
-    return ""
 }
 
 

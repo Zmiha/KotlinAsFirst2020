@@ -150,7 +150,7 @@ fun dateDigitToStr(digital: String): String {
         10 -> "октября"
         11 -> "ноября"
         12 -> "декабря"
-        else -> return "0"
+        else -> return ""
     }
     return "$num1 $month $num3"
 }

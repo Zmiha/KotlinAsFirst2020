@@ -134,7 +134,7 @@ fun dateDigitToStr(digital: String): String {
     if (num1 == null || num1 < 1 || num2 == null || num2 < 1 ||
         num3 == null || num3 < 1
     ) return ""
-    if (num1 < 1 || num1 > daysInMonth(num2, num3)) {
+    if (num1.toInt() < 1 || num1.toInt() > daysInMonth(num2, num3)) {
         return ""
     }
     val month = when (parts[1].toInt()) {

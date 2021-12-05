@@ -208,8 +208,8 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun sqr(n: Int): Int = n * n
-fun count(n: Int): Int {
+fun sqr(n: Long): Long = n * n
+fun count(n: Long): Int {
     var temp = n
     var c = 0
     while (temp > 0) {
@@ -218,39 +218,38 @@ fun count(n: Int): Int {
     }
     return c
 }
-fun inversion(n: Int): Int {
-    var a = 0
+
+fun inversion(n: Long): Long {
+    var a: Long = 0
     var x = n
-    var raz = -1.0 + count(x)
+    var diff = -1.0 + count(x)
     while (x > 0) {
-        a += (x % 10) * (10.0.pow(raz).toInt())
+        a += (x % 10) * (10.0.pow(diff).toLong())
         x /= 10
-        raz--
+        diff--
     }
     return a
 }
 
 fun squareSequenceDigit(n: Int): Int {
-    var schetchick = 0
+    var counter: Long = 0
     var t = 0
     while (n > 0) {
-        schetchick++
-        val ch = sqr(schetchick)
+        counter++
+        val ch = sqr(counter)
         var invch = inversion((ch))
-        val countch = count(ch)
-        val countinv = count(invch)
-        var raz = countch - countinv
+        var diff = count(ch) - count(invch)
         while (invch > 0) {
             t++
             if (t == n)
-                return invch % 10
+                return (invch % 10).toInt()
             invch /= 10
         }
-        while (raz > 0) {
+        while (diff > 0) {
             t++
             if (t == n)
                 return 0
-            raz--
+            diff--
         }
     }
     return 0
@@ -265,27 +264,26 @@ fun squareSequenceDigit(n: Int): Int {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
+
 fun fibSequenceDigit(n: Int): Int {
-    var schetchick = 0
+    var counter: Long = 0
     var t = 0
     while (n > 0) {
-        schetchick++
-        val ch = fib(schetchick)
+        counter++
+        val ch = fib(counter.toInt()).toLong()
         var invch = inversion((ch))
-        val countch = count(ch)
-        val countinv = count(invch)
-        var raz = countch - countinv
+        var diff = count(ch) - count(invch)
         while (invch > 0) {
             t++
             if (t == n)
-                return invch % 10
+                return (invch % 10).toInt()
             invch /= 10
         }
-        while (raz > 0) {
+        while (diff > 0) {
             t++
             if (t == n)
                 return 0
-            raz--
+            diff--
         }
     }
     return 0

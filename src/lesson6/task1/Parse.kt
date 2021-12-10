@@ -124,7 +124,6 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    if (digital == null) return ""
     val parts = digital.split(".")
     val num1 = parts[0].toIntOrNull()
     val num2 = parts[1].toIntOrNull()
@@ -186,7 +185,7 @@ fun bestLongJump(jumps: String): Int {
     val parts = jumps.split(" ")
     return if (jumps.contains(Regex("""[^\d ^\% ^\-]"""))) -1 else {
         val max = parts.maxOrNull()
-        return if (max == "%" || max == "-") -1 else (max!!?.toInt())
+        return if (max == "%" || max == "-" || max == null) -1 else (max?.toInt()!!)
     }
 }
 

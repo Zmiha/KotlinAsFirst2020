@@ -124,6 +124,7 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
+    if (digital == "") return ""
     val parts = digital.split(".")
     val num1 = parts[0].toIntOrNull()
     val num2 = parts[1].toIntOrNull()
@@ -182,6 +183,7 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
+    if (jumps == "") return -1
     val parts = jumps.split(" ")
     return if (jumps.contains(Regex("""[^\d ^\% ^\-]"""))) -1 else {
         val max = parts.maxOrNull()

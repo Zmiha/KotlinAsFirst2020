@@ -4,6 +4,7 @@ package lesson7.task1
 
 import java.io.File
 import kotlin.math.pow
+import kotlin.system.exitProcess
 
 // Урок 7: работа с файлами
 // Урок интегральный, поэтому его задачи имеют сильно увеличенную стоимость
@@ -66,6 +67,11 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun deleteMarked(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val input = File(inputName).readLines()
+    if (input.toString() == "") {
+        writer.write("")
+        writer.close()
+        exitProcess(0)
+    }
     var k = -1
     while (writer != emptyList<Any>()) {
         k += 1

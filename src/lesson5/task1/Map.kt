@@ -198,8 +198,8 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
  *   canBuildFrom(listOf('a', 'b', 'o'), "baobab") -> true
  */
 fun canBuildFrom(chars: List<Char>, word: String): Boolean {
-    for (i in word.indices){
-        if (chars.all { it != word[i]})
+    for (i in word.indices) {
+        if (chars.all { it != word[i] })
             return false
     }
     return true
@@ -224,10 +224,10 @@ fun extractRepeats(list: List<String>): Map<String, Int> {
         map[list[i]] = list.count { it == list[i] }
     }
     val max = map.maxByOrNull { it.value } ?: return emptyMap()
-    if (map.values.toSet() == setOf(1))
-        return emptyMap()
-    else
-        result += max.toPair()
+    for (i in list.indices) {
+        if (map[list[i]] != 1)
+            result[list[i]] = map[list[i]]!!
+    }
     return result
 }
 

@@ -472,7 +472,7 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     str.clear()
     writer.newLine()
     str.append("*")
-    for (i in 0 until 4)
+    for (i in 0 until count(lhv * rhv) - count(rhv))
         str.append(" ")
     str.append(rhv)
     writer.write(str.toString())

@@ -488,7 +488,7 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     var x = 0
     var rank = sumcounts
     //var rep = 0
-    val value = Array(count(lhv)) { 0 }
+    val value = Array(count(rhv)) { 0 }
     for (i in 0 until count(rhv)) {
         ch = temp % 10
         temp /= 10

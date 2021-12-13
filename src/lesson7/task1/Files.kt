@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import java.lang.IndexOutOfBoundsException
 import kotlin.math.pow
 import kotlin.system.exitProcess
 
@@ -64,7 +65,7 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Все остальные строки должны быть перенесены без изменений, включая пустые строки.
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
-fun deleteMarked(inputName: String, outputName: String) {
+fun deleteMarked(inputName: String, outputName: String) = try {
     val writer = File(outputName).bufferedWriter()
     val input = File(inputName).readLines()
     if (input.size == 1) {
@@ -93,6 +94,8 @@ fun deleteMarked(inputName: String, outputName: String) {
         }
     }
     writer.close()
+}
+catch (e: IndexOutOfBoundsException) {
 }
 
 /**
@@ -472,8 +475,12 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     str.clear()
     writer.newLine()
     str.append("*")
-    for (i in 0 until count(lhv * rhv) - count(rhv))
-        str.append(" ")
+    if (count(rhv) == 1)
+        for (i in 1 until count(lhv * rhv) - count(rhv))
+            str.append(" ")
+    else
+        for (i in 0 until count(lhv * rhv) - count(rhv))
+            str.append(" ")
     str.append(rhv)
     writer.write(str.toString())
     writer.newLine()

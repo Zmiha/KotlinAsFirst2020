@@ -2,6 +2,7 @@
 
 package lesson7.task1
 
+import lesson2.task2.circleInside
 import java.io.File
 import java.lang.IndexOutOfBoundsException
 import kotlin.math.pow
@@ -68,11 +69,6 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun deleteMarked(inputName: String, outputName: String) = try {
     val writer = File(outputName).bufferedWriter()
     val input = File(inputName).readLines()
-    if (input.size == 1) {
-        writer.write(input[0])
-        writer.close()
-        exitProcess(0)
-    }
     var k = -1
     while (writer != emptyList<Any>()) {
         k += 1
@@ -475,7 +471,7 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     str.clear()
     writer.newLine()
     str.append("*")
-    if (count(rhv) == 1)
+    if ((kotlin.math.abs(count(lhv) - count(rhv)) < count(lhv * rhv) - count(rhv)) && (count(rhv) == 1))
         for (i in 1 until count(lhv * rhv) - count(rhv))
             str.append(" ")
     else

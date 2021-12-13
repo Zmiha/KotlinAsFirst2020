@@ -25,28 +25,60 @@ class OpenHashSet<T>(val capacity: Int) {
     /**
      * Число элементов в хеш-таблице
      */
-    val size: Int get() = TODO()
+    val size: Int
+        get() {
+            if (capacity == 0) return 0
+            for (i in 0 until capacity) {
+                if (elements[i] == null) return i
+            }
+            return capacity
+        }
+
 
     /**
      * Признак пустоты
      */
-    fun isEmpty(): Boolean = TODO()
+    fun isEmpty(): Boolean = capacity == 0 || elements[0] == null
 
     /**
      * Добавление элемента.
      * Вернуть true, если элемент был успешно добавлен,
      * или false, если такой элемент уже был в таблице, или превышена вместимость таблицы.
      */
-    fun add(element: T): Boolean = TODO()
+    fun add(element: T): Boolean {
+        for (i in 0 until capacity) {
+            if (elements[i] == null) {
+                elements[i] = element
+                return true
+            }
+            if (elements[i] == element) return false
+        }
+        return false
+    }
 
     /**
      * Проверка, входит ли заданный элемент в хеш-таблицу
      */
-    operator fun contains(element: T): Boolean = TODO()
+    operator fun contains(element: T): Boolean {
+        for (i in 0 until capacity) {
+            if (elements[i] == null) return false
+            if (elements[i] == element) return true
+        }
+        return false
+    }
 
     /**
      * Таблицы равны, если в них одинаковое количество элементов,
      * и любой элемент из второй таблицы входит также и в первую
      */
-    override fun equals(other: Any?): Boolean = TODO()
+    override fun equals(other: Any?): Boolean {
+        if (other !is OpenHashSet<*>) return false
+        if (size != other.size) return false
+        for (i in 0 until size) {
+            if (elements[i] != other.elements[i]) return false
+        }
+        return true
+    }
+
+    override fun hashCode(): Int = elements.sliceArray(0..size).contentHashCode()
 }

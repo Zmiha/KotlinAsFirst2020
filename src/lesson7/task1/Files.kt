@@ -90,8 +90,7 @@ fun deleteMarked(inputName: String, outputName: String) = try {
         }
     }
     writer.close()
-}
-catch (e: IndexOutOfBoundsException) {
+} catch (e: IndexOutOfBoundsException) {
 }
 
 /**
@@ -464,8 +463,7 @@ fun count(n: Int): Int {
 fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val str = StringBuilder()
-    val sumcounts = count(lhv) + count(rhv)
-    for (i in 0 until count(rhv))
+    for (i in 0 until count(rhv * lhv) + 1 - count(lhv))
         str.append(" ")
     writer.write(str.toString() + lhv)
     str.clear()
@@ -481,7 +479,7 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     writer.write(str.toString())
     writer.newLine()
     str.clear()
-    for (i in 0 until sumcounts)
+    for (i in 0 until count(lhv * rhv) + 1)
         str.append("-")
     writer.write(str.toString())
     writer.newLine()
@@ -489,16 +487,15 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     var temp = rhv
     var ch = 0
     var x = 0
-    var rank = sumcounts
+    var rank = count(lhv * rhv) + 1
     val value = Array(count(rhv)) { 0 }
     for (i in 0 until count(rhv)) {
         ch = temp % 10
         temp /= 10
         x = ch * lhv
         if (i == 0) {
-            if (rank - count(x) != 0)
-                for (j in 0 until rank - count(x))
-                    str.append(" ")
+            for (j in 0 until rank - count(x))
+                str.append(" ")
         }
         if (i != 0) {
             str.append("+")
@@ -513,20 +510,13 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
         writer.newLine()
         str.clear()
     }
-    for (i in 0 until sumcounts)
+    for (i in 0 until count(lhv * rhv) + 1)
         str.append("-")
     writer.write(str.toString())
     writer.newLine()
     str.clear()
-    var sum = 0
-    for (i in value.indices) {
-        sum += value[i] * (10.0.pow(i).toInt())
-    }
-    if (sumcounts - count(sum) != 0)
-        for (i in 0 until sumcounts - count(sum))
-            str.append(" ")
-    str.append(sum)
-    writer.write(str.toString())
+    str.append(" ")
+    writer.write(str.toString() + rhv * lhv)
     writer.close()
 }
 

@@ -67,8 +67,8 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
 fun deleteMarked(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val input = File(inputName).readLines()
-    if (input.toString() == "") {
-        writer.write("")
+    if (input.size == 1) {
+        writer.write(input[0])
         writer.close()
         exitProcess(0)
     }
@@ -455,10 +455,10 @@ fun markdownToHtml(inputName: String, outputName: String) {
 fun count(n: Int): Int {
     var temp = n
     var c = 0
-    while (temp > 0) {
+    do {
         c++
         temp /= 10
-    }
+    } while (temp > 0)
     return c
 }
 
@@ -487,7 +487,6 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     var ch = 0
     var x = 0
     var rank = sumcounts
-    //var rep = 0
     val value = Array(count(rhv)) { 0 }
     for (i in 0 until count(rhv)) {
         ch = temp % 10
@@ -526,7 +525,6 @@ fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     str.append(sum)
     writer.write(str.toString())
     writer.close()
-
 }
 
 

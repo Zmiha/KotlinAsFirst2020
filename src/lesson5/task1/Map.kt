@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import java.security.Key
+
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
 // Рекомендуемое количество баллов = 9
@@ -283,7 +285,16 @@ fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<Stri
  *   findSumOfTwo(listOf(1, 2, 3), 4) -> Pair(0, 2)
  *   findSumOfTwo(listOf(1, 2, 3), 6) -> Pair(-1, -1)
  */
-fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
+fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
+    val sortedList = list.sorted()
+    var result = Pair(-1, -1)
+    for (i in sortedList) {
+        for (k in sortedList) {
+            if ((k + i == number) && (i != k)) result = Pair(k - 1, i - 1); break
+        }
+    }
+    return result
+}
 
 /**
  * Очень сложная (8 баллов)
@@ -306,4 +317,16 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> = TODO()
  *     450
  *   ) -> emptySet()
  */
-fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> = TODO()
+fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
+    val result = mutableSetOf<String>()
+    val maxPrice = 0
+    for ((key, value) in treasures) {
+        val pair = treasures[key]
+        val weight = pair?.first
+        val price = pair?.second
+        if ((price!! > maxPrice) && (weight!!.toInt() <= capacity))
+            result.add(key)
+    }
+    return (result)
+}
+

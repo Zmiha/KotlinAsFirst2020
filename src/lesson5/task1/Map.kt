@@ -2,6 +2,7 @@
 
 package lesson5.task1
 
+import jdk.jfr.Label
 import java.security.Key
 
 // Урок 5: ассоциативные массивы и множества
@@ -132,8 +133,12 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = b.entr
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
-    TODO()
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): MutableMap<String, String> {
+    for ((k, v) in b) {
+        if (a.containsValue(v) && a.containsKey(k))
+            a.remove(k, v)
+    }
+    return a
 }
 
 /**
@@ -143,7 +148,14 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяющихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
+    val result = mutableListOf<String>()
+    for (i in a) {
+        if (b.contains(i))
+            result.add(i)
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -162,7 +174,12 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
  *     mapOf("Emergency" to "911", "Police" to "02")
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
+    val result = (mapA.keys + mapB.keys).associateWith {
+        setOf(mapA[it], mapB[it]).filterNotNull().joinToString()
+    } as MutableMap<String, String>
+    return result
+}
 
 /**
  * Средняя (4 балла)
@@ -325,7 +342,7 @@ fun findSumOfTwo(list: List<Int>, number: Int): Pair<Int, Int> {
 fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<String> {
     val result = mutableSetOf<String>()
     var backPack = capacity
-    for ((key, value) in treasures) {
+    for ((key) in treasures) {
         val pair = treasures[key]
         val weight = pair?.first
         if (weight!! <= backPack) {

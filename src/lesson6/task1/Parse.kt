@@ -187,7 +187,7 @@ fun bestLongJump(jumps: String): Int {
     val parts = jumps.split(" ")
     return if (jumps.contains(Regex("""[^\d ^\% ^\-]"""))) -1 else {
         val max = parts.maxOrNull()
-        return if (max == "%" || max == "-" || max == null) -1 else (max?.toInt()!!)
+        return if (max == "%" || max == "-" || max == null) -1 else (max.toInt())
     }
 }
 
@@ -237,7 +237,21 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    var result = ""
+    var maxPrice = 0.0
+    if (description != "") {
+        val bigParts = description.split("; ")
+        for (i in bigParts) {
+            val smallParts = i.split(" ")
+            if (smallParts.last().toDouble() > maxPrice) {
+                maxPrice = smallParts.last().toDouble()
+                result = smallParts.first()
+            }
+        }
+    } else return ""
+    return result
+}
 
 /**
  * Сложная (6 баллов)

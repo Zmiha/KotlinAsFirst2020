@@ -249,8 +249,7 @@ fun mostExpensive(description: String): String {
             }
         }
     }
-    return if (result == "") "Any good with price 0.0" else
-        result
+    return result
 }
 
 /**

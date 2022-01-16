@@ -124,7 +124,6 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    if (digital == "") return ""
     val parts = digital.split(".")
     val num1 = parts[0].toIntOrNull()
     val num2 = parts[1].toIntOrNull()
@@ -240,16 +239,16 @@ fun firstDuplicateIndex(str: String): Int = TODO()
 fun mostExpensive(description: String): String {
     var result = ""
     var maxPrice = 0.0
-    if (description != "") {
+    if (description.contains(Regex("""[А-Яа-я \d.;]"""))) {
         val bigParts = description.split("; ")
         for (i in bigParts) {
             val smallParts = i.split(" ")
-            if (smallParts.last().toDouble() > maxPrice) {
+            if ((smallParts.last().toDouble() > maxPrice) && (smallParts.last().toDouble() >= 0.0)) {
                 maxPrice = smallParts.last().toDouble()
                 result = smallParts.first()
             }
         }
-    } else return ""
+    }
     return result
 }
 

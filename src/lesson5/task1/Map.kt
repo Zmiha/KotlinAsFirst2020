@@ -2,8 +2,6 @@
 
 package lesson5.task1
 
-import jdk.jfr.Label
-import java.security.Key
 
 // Урок 5: ассоциативные массивы и множества
 // Максимальное количество баллов = 14
@@ -150,8 +148,8 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): MutableMa
  */
 fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
     val result = mutableListOf<String>()
-    for (i in a) {
-        if (b.contains(i))
+    for (i in b) {
+        if (a.contains(i))
             result.add(i)
     }
     return result

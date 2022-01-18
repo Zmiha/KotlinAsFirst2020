@@ -206,7 +206,18 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String {
+    var result = "null"
+    var minPrice = 9999.0
+    for ((key, value) in stuff) {
+        println(value)
+        if ((value.first == kind) && (value.second > minPrice)) {
+            minPrice = value.second
+            result = key
+        }
+    }
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -232,6 +243,12 @@ fun canBuildFrom(chars: List<Char>, word: String): Boolean = TODO()
  *   extractRepeats(listOf("a", "b", "a")) -> mapOf("a" to 2)
  */
 fun extractRepeats(list: List<String>): Map<String, Int> = TODO()
+/**{
+var result = mutableMapOf<String, Int>()
+var maxRepetition = 0
+maxRepetition = (list.count { it == "a" })
+return result
+} */
 
 /**
  * Средняя (3 балла)
@@ -282,6 +299,21 @@ fun hasAnagrams(words: List<String>): Boolean = TODO()
  *        )
  */
 fun propagateHandshakes(friends: Map<String, Set<String>>): Map<String, Set<String>> = TODO()
+/**{
+var result = mutableMapOf("" to setOf(""))
+for ((key, value) in friends) {
+result[key] = value
+}
+for ((key, value) in result) {
+for ((key1, value1) in friends) {
+if ((key == key1) && ) {
+result[key] = value1
+}
+}
+}
+println(result)
+return result
+} */
 
 /**
  * Сложная (6 баллов)

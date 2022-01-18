@@ -3,6 +3,7 @@
 package lesson6.task1
 
 import lesson2.task2.daysInMonth
+import java.util.*
 
 // Урок 6: разбор строк, исключения
 // Максимальное количество баллов = 13
@@ -134,7 +135,7 @@ fun dateDigitToStr(digital: String): String {
     if (num1 == null || num1 <= 0 || num2 == null || num2 !in 1..12 ||
         num3 == null || num3 <= 0
     ) return ""
-    if (num1 < 1 || num1 > daysInMonth(num2, num3)) {
+    if (num1 > daysInMonth(num2, num3)) {
         return ""
     }
     val month = when (num2) {
@@ -201,7 +202,17 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int = TODO() /**{
+    val result = -1
+    val reGex = Regex("""\d+ [+]|\d+ [%]\+""")
+    if (jumps.contains(reGex)) {
+        for (i in jumps) {
+            val matchResult = reGex.find(jumps)
+            println((matchResult!!.value))
+        }
+    }
+    return result
+} */
 
 /**
  * Сложная (6 баллов)
@@ -223,7 +234,14 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    var result = -1
+    val str = str.lowercase(Locale.getDefault())
+    if (str.contains(Regex("""([а-яА-Я]+)\s\1"""))) {
+        result = str.indexOf(Regex("""([а-яА-Я]+)\s\1""").find(str, 0)!!.value)
+    }
+    return result
+}
 
 /**
  * Сложная (6 баллов)

@@ -237,8 +237,8 @@ fun plusMinus(expression: String): Int = TODO()
 fun firstDuplicateIndex(str: String): Int {
     var result = -1
     val str = str.lowercase(Locale.getDefault())
-    if (str.contains(Regex("""([а-яА-Я~!@#$'%^&*+)(}{\.\/\]\w]+)\s\1"""))) {
-        result = str.indexOf(Regex("""([а-яА-Я~!@#$'%^&*+)(}{\.\/\]\w]+)\s\1""").find(str, 0)!!.value)
+    if (str.contains(Regex("""([^0]+)\s\1"""))) {
+        result = str.indexOf(Regex("""([^0]+)\s\1""").find(str, 0)!!.value)
     }
     return result
 }

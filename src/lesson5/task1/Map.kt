@@ -210,12 +210,9 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
     var result = ""
     var minPrice = 9999.0
     for ((key, value) in stuff) {
-        println(value)
-        if ((value.first == kind) && (value.second > minPrice)) {
+        if ((value.first == kind) && (value.second < minPrice)) {
             minPrice = value.second
-            println(minPrice)
             result = key
-            println(result)
         }
     }
     return if (result == "") null else result

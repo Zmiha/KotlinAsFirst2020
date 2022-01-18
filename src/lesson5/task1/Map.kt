@@ -215,7 +215,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
         }
     }
     for ((key, value) in stuff) {
-        if ((value.first == kind) && (value.second < price)) {
+        if ((value.first == kind) && (value.second <= price)) {
             price = value.second
             result = key
         }

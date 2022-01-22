@@ -126,7 +126,7 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     var result = ""
-    if (digital.contains(Regex("""\d{2}\.\d{2}\.\d{4}"""))) {
+    if (digital.contains(Regex("""\d{2}\.\d{2}\.\d+"""))) {
         val parts = digital.split(".")
         val num1 = parts[0].toIntOrNull()
         val num2 = parts[1].toIntOrNull()
@@ -157,6 +157,7 @@ fun dateDigitToStr(digital: String): String {
         }
         result = "$num1 $month $num3"
     }
+    println(result)
     return result
 }
 

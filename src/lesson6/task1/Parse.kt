@@ -125,35 +125,39 @@ fun dateStrToDigit(str: String): String {
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String {
-    val parts = digital.split(".")
-    val num1 = parts[0].toIntOrNull()
-    val num2 = parts[1].toIntOrNull()
-    val num3 = parts[2].toIntOrNull()
-    if (parts.size != 3) {
-        return ""
+    var result = ""
+    if (digital.contains(Regex("""\d{2}\.\d{2}\.\d{4}"""))) {
+        val parts = digital.split(".")
+        val num1 = parts[0].toIntOrNull()
+        val num2 = parts[1].toIntOrNull()
+        val num3 = parts[2].toIntOrNull()
+        if (parts.size != 3) {
+            return ""
+        }
+        if (num1 == null || num1 <= 0 || num2 == null || num2 !in 1..12 ||
+            num3 == null || num3 <= 0
+        ) return ""
+        if (num1 > daysInMonth(num2, num3)) {
+            return ""
+        }
+        val month = when (num2) {
+            1 -> "января"
+            2 -> "февраля"
+            3 -> "марта"
+            4 -> "апреля"
+            5 -> "мая"
+            6 -> "июня"
+            7 -> "июля"
+            8 -> "августа"
+            9 -> "сентября"
+            10 -> "октября"
+            11 -> "ноября"
+            12 -> "декабря"
+            else -> return ""
+        }
+        result = "$num1 $month $num3"
     }
-    if (num1 == null || num1 <= 0 || num2 == null || num2 !in 1..12 ||
-        num3 == null || num3 <= 0
-    ) return ""
-    if (num1 > daysInMonth(num2, num3)) {
-        return ""
-    }
-    val month = when (num2) {
-        1 -> "января"
-        2 -> "февраля"
-        3 -> "марта"
-        4 -> "апреля"
-        5 -> "мая"
-        6 -> "июня"
-        7 -> "июля"
-        8 -> "августа"
-        9 -> "сентября"
-        10 -> "октября"
-        11 -> "ноября"
-        12 -> "декабря"
-        else -> return ""
-    }
-    return "$num1 $month $num3"
+    return result
 }
 
 /**
@@ -185,7 +189,7 @@ fun flattenPhoneNumber(phone: String): String = TODO()
 fun bestLongJump(jumps: String): Int {
     if (jumps == "") return -1
     val parts = jumps.split(" ")
-    return if (jumps.contains(Regex("""[^\d ^\% ^\-]"""))) -1 else {
+    return if (jumps.contains(Regex("""[^\d \% \-]"""))) -1 else {
         val max = parts.maxOrNull()
         return if (max == "%" || max == "-" || max == null) -1 else (max.toInt())
     }
@@ -202,17 +206,20 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO() /**{
-    val result = -1
+fun bestHighJump(jumps: String): Int {
+    var result = -1
     val reGex = Regex("""\d+ [+]|\d+ [%]\+""")
     if (jumps.contains(reGex)) {
-        for (i in jumps) {
-            val matchResult = reGex.find(jumps)
-            println((matchResult!!.value))
+        val matchResult = reGex.findAll(jumps)
+        for (j in matchResult) {
+            val r = (Regex("""\d+""").find(j.value)?.value)!!.toInt()
+            if (r > result) {
+                result = r
+            }
         }
     }
     return result
-} */
+}
 
 /**
  * Сложная (6 баллов)
@@ -236,9 +243,9 @@ fun plusMinus(expression: String): Int = TODO()
  */
 fun firstDuplicateIndex(str: String): Int {
     var result = -1
-    val str = str.lowercase(Locale.getDefault())
-    if (str.contains(Regex("""([^ ]+)\s\1"""))) {
-        result = str.indexOf(Regex("""([^ ]+)\s\1""").find(str, 0)!!.value)
+    val string = str.lowercase(Locale.getDefault())
+    if (string.contains(Regex("""([^ ]+)\s\1"""))) {
+        result = string.indexOf(Regex("""([^ ]+)\s\1""").find(string, 0)!!.value)
     }
     return result
 }

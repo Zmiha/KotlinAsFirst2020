@@ -190,24 +190,28 @@ fun fromRoman(roman: String): Int {
         "M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100, "XC" to 90, "L" to 50,
         "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1
     )
-    var symbols = ""
-    var danoroman = "$roman."
+    var symbols: String = ""
+    var danoroman = roman
     var sum = 0
-    while (danoroman != ".") {
-        if (danoroman[0].toString() in alf.keys)
-            symbols = danoroman[0].toString()
-        danoroman = danoroman.drop(1)
-        while (symbols + danoroman[0] in alf.keys) {
-            symbols += danoroman[0]
+    println("I" in alf.keys.toString())
+    if (danoroman.all { it in alf.keys.toString() }) {
+        danoroman += "."
+        while (danoroman != ".") {
+            if (danoroman[0].toString() in alf.keys)
+                symbols = danoroman[0].toString()
             danoroman = danoroman.drop(1)
-        }
-        if (symbols != "")
+            while (symbols + danoroman[0] in alf.keys) {
+                symbols += danoroman[0]
+                danoroman = danoroman.drop(1)
+            }
+            println(symbols)
             sum += alf[symbols]!!
-        else
-            return -1
-    }
+        }
+    } else
+        return -1
     return sum
 }
+
 /**
  * Очень сложная (7 баллов)
  *

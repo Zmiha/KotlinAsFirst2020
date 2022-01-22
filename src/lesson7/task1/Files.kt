@@ -66,21 +66,15 @@ fun alignFile(inputName: String, lineLength: Int, outputName: String) {
  * Все остальные строки должны быть перенесены без изменений, включая пустые строки.
  * Подчёркивание в середине и/или в конце строк значения не имеет.
  */
-fun deleteMarked(inputName: String, outputName: String) = try {
+fun deleteMarked(inputName: String, outputName: String) {
     val writer = File(outputName).bufferedWriter()
     val input = File(inputName).readLines()
-    var k = -1
-    while (writer != emptyList<Any>()) {
-        k += 1
-        if (input[k] == "") {
-            writer.write(input[k])
-            break
-        } else if (input[k][0] != '_') {
-            writer.write(input[k])
-            break
-        }
-    }
-    for (i in k + 1 until input.size) {
+    if (input != emptyList<Any>())
+        if (input[0] == "")
+            writer.write(input[0])
+        else if (input[0][0] != '_')
+            writer.write(input[0])
+    for (i in 0 + 1 until input.size) {
         if (input[i] == "") {
             writer.newLine()
             writer.write(input[i])
@@ -90,7 +84,6 @@ fun deleteMarked(inputName: String, outputName: String) = try {
         }
     }
     writer.close()
-} catch (e: IndexOutOfBoundsException) {
 }
 
 /**
@@ -462,57 +455,34 @@ fun count(n: Int): Int {
 
 fun printMultiplicationProcess(lhv: Int, rhv: Int, outputName: String) {
     val writer = File(outputName).bufferedWriter()
-    val str = StringBuilder()
-    for (i in 0 until count(rhv * lhv) + 1 - count(lhv))
-        str.append(" ")
-    writer.write(str.toString() + lhv)
-    str.clear()
+    val str1 = " ".repeat(count(rhv * lhv) + 1 - count(lhv))
+    writer.write(str1 + lhv)
     writer.newLine()
-    str.append("*")
-    for (i in 0 until count(lhv * rhv) - count(rhv))
-        str.append(" ")
-    str.append(rhv)
-    writer.write(str.toString())
+    val str2 = "*" + (" ".repeat(count(rhv * lhv) - count(rhv))) + rhv
+    writer.write(str2)
     writer.newLine()
-    str.clear()
-    for (i in 0 until count(lhv * rhv) + 1)
-        str.append("-")
-    writer.write(str.toString())
+    val str3 = "-".repeat(count(rhv * lhv) + 1)
+    writer.write(str3)
     writer.newLine()
-    str.clear()
     var temp = rhv
-    var ch = 0
-    var x = 0
+    var x: Int
+    var str: String
     var rank = count(lhv * rhv) + 1
-    val value = Array(count(rhv)) { 0 }
     for (i in 0 until count(rhv)) {
-        ch = temp % 10
+        x = temp % 10 * lhv
         temp /= 10
-        x = ch * lhv
-        if (i == 0) {
-            for (j in 0 until rank - count(x))
-                str.append(" ")
-        }
-        if (i != 0) {
-            str.append("+")
-            if (rank - count(x) - 1 != 0)
-                for (j in 0 until rank - count(x) - 1)
-                    str.append(" ")
-        }
+        str = if (i == 0)
+            (" ").repeat(rank - count(x)) + x
+        else
+            "+" + (" ").repeat(rank - count(x) - 1) + x
         rank -= 1
-        str.append(x)
-        value[i] = x
-        writer.write(str.toString())
+        writer.write(str)
         writer.newLine()
-        str.clear()
     }
-    for (i in 0 until count(lhv * rhv) + 1)
-        str.append("-")
-    writer.write(str.toString())
+    val final = "-".repeat(count(lhv * rhv) + 1)
+    writer.write(final)
     writer.newLine()
-    str.clear()
-    str.append(" ")
-    writer.write(str.toString() + rhv * lhv)
+    writer.write(" " + rhv * lhv)
     writer.close()
 }
 

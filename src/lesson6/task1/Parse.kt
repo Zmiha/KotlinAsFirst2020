@@ -149,7 +149,16 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val list = str.split(" ")
+    var result = 0
+    for (i in 0..list.size - 2) {
+        if (list[i].equals(list[i + 1], ignoreCase = true))
+            return result
+        result += list[i].length + 1
+    }
+    return -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -162,18 +171,7 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть больше нуля либо равны нулю.
  */
-fun mostExpensive(description: String): String {
-    val splitdescription = description.split("; ", " ")
-    val map = mutableMapOf<String, Double>()
-    return try {
-        for (i in 0 until splitdescription.size step 2)
-            map[splitdescription[i]] = splitdescription[i + 1].toDouble()
-        val max = map.maxByOrNull { it.value }
-        max!!.key
-    } catch (e: Exception) {
-        ""
-    }
-}
+fun mostExpensive(description: String): String = TODO()
 
 /**
  * Сложная (6 баллов)
@@ -192,24 +190,24 @@ fun fromRoman(roman: String): Int {
         "M" to 1000, "CM" to 900, "D" to 500, "CD" to 400, "C" to 100, "XC" to 90, "L" to 50,
         "XL" to 40, "X" to 10, "IX" to 9, "V" to 5, "IV" to 4, "I" to 1
     )
-    var simvols: String
-    var danoroman = "$roman/"
+    var symbols = ""
+    var danoroman = "$roman."
     var sum = 0
-    while (danoroman != "/") {
-        var k = 1
-        simvols = danoroman[0].toString()
-        while (simvols + danoroman[k] in alf.keys) {
-            simvols += danoroman[k]
-            k += 1
+    while (danoroman != ".") {
+        if (danoroman[0].toString() in alf.keys)
+            symbols = danoroman[0].toString()
+        danoroman = danoroman.drop(1)
+        while (symbols + danoroman[0] in alf.keys) {
+            symbols += danoroman[0]
+            danoroman = danoroman.drop(1)
         }
-        if (alf[simvols] in alf.values) sum += alf[simvols]!!
-        val t = danoroman.count() - simvols.count()
-        danoroman = danoroman.takeLast(t)
-        if (alf[simvols] !in alf.values) return -1
+        if (symbols != "")
+            sum += alf[symbols]!!
+        else
+            return -1
     }
     return sum
 }
-
 /**
  * Очень сложная (7 баллов)
  *

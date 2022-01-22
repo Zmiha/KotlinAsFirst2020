@@ -74,13 +74,13 @@ fun deleteMarked(inputName: String, outputName: String) {
             writer.write(input[0])
         else if (input[0][0] != '_')
             writer.write(input[0])
-    for (i in 0 + 1 until input.size) {
+    for (i in 1 until input.size) {
         if (input[i] == "") {
-            writer.newLine()
             writer.write(input[i])
+            writer.newLine()
         } else if (input[i][0] != '_') {
-            writer.newLine()
             writer.write(input[i])
+            writer.newLine()
         }
     }
     writer.close()

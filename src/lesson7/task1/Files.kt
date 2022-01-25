@@ -81,22 +81,15 @@ fun deleteMarked(inputName: String, outputName: String) {
  *
  */
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
-    var result = mutableMapOf<String, Int>()
-    val writer = File(inputName).bufferedReader().readLines()
-    val m = substrings.associateWith {
+    val writer = File(inputName).bufferedReader().readText()
+    val result = substrings.associateWith {
         var c = 0
-        for (j in writer) {
-            val regex = Regex(it.lowercase())
-            if (j.lowercase().contains(regex)) {
-                val matchResult = regex.find(j.lowercase())
-                //println(matchResult!!.value)
-                var c = it
+        for (i in writer.indices) {
+            if (writer.startsWith(it, i, ignoreCase = true))
                 c += 1
-            }
         }
-        println(c)
+        c
     }
-    println(m)
     return result
 }
 
@@ -198,6 +191,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  *
  */
 fun top20Words(inputName: String): Map<String, Int> = TODO()
+
 
 /**
  * Средняя (14 баллов)

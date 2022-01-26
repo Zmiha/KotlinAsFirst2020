@@ -230,19 +230,19 @@ fun top20Words(inputName: String): Map<String, Int> = TODO()
  */
 fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: String) {
     var writer = File(inputName).bufferedReader().readText()
-    val result1 = File(outputName).bufferedWriter().use {
-        for (i in writer) {
-            for ((key, value) in dictionary) {
-                if (i.lowercaseChar() == key.lowercaseChar())
-                    writer = (writer.replace(i.toString(), value.lowercase()))
+    val result = File(outputName).bufferedWriter().use {
+        if (writer == "") return it.write("")
+        else {
+            for (i in writer) {
+                for ((key, value) in dictionary) {
+                    if (i.lowercaseChar() == key.lowercaseChar())
+                        writer = (writer.replace(i.toString(), value.lowercase()))
+                }
             }
         }
         writer = writer.substring(0, 1).uppercase() + writer.substring(1)
         it.write(writer)
     }
-    val result: Unit
-    if (writer != "") result = result1
-    else return result1
     return result
 }
 

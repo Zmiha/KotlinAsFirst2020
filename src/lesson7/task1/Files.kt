@@ -238,8 +238,9 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
             }
         }
         writer = writer.substring(0, 1).uppercase() + writer.substring(1)
-        if (writer == "") it.write("")
+        if (writer == null) return it.write("")
         else it.write(writer)
+        //it.write(writer)
     }
     return result
 }

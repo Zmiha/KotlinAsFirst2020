@@ -233,8 +233,8 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
     val result = File(outputName).bufferedWriter().use {
         if (writer == "") return it.write("")
         else {
-            for (i in writer) {
-                for ((key, value) in dictionary) {
+            for ((key, value) in dictionary) {
+                for (i in writer) {
                     if (i.lowercaseChar() == key.lowercaseChar())
                         if (i.isUpperCase()) {
                             val uppercase = value.substring(0, 1).uppercase() + value.substring(1).lowercase()

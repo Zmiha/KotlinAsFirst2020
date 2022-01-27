@@ -236,9 +236,11 @@ fun transliterate(inputName: String, dictionary: Map<Char, String>, outputName: 
             for (i in writer) {
                 for ((key, value) in dictionary) {
                     if (i.lowercaseChar() == key.lowercaseChar())
-                        if (i.isUpperCase())
-                            writer = (writer.replace(i.toString(), value.lowercase())).first().uppercase()
-                        else writer = (writer.replace(i.toString(), value.lowercase())).lowercase()
+                        if (i.isUpperCase()) {
+                            val uppercase = value.substring(0, 1).uppercase() + value.substring(1).lowercase()
+                            println(uppercase)
+                            writer = writer.replace(i.toString(), uppercase)
+                        } else writer = writer.replace(i.toString(), value.lowercase())
                 }
             }
         }
